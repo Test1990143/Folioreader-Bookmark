@@ -774,10 +774,12 @@ function getSelectionRect(element) {
     //var rect = range.getBoundingClientRect();
     var rect = RangeFix.getBoundingClientRect(range);
     return {
-        left: rect.left,
-        top: rect.top,
-        right: rect.right,
-        bottom: rect.bottom
+        
+        left: rect.left != null ? rect.left :0 ,
+        top: rect.top!= null ? rect.top :0 ,
+        right: rect.right!= null ? rect.right :0 ,
+        bottom: rect.bottom!= null ? rect.bottom :0 
+        
     };
 }
 
