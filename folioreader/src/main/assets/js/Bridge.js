@@ -768,18 +768,31 @@ function getSelectionRect(element) {
         range = document.createRange();
         range.selectNodeContents(element);
     } else {
-        range = window.getSelection().getRangeAt(0);
+          if (window.getSelection().rangeCount > 0){
+            range = window.getSelection().getRangeAt(0);
+        }
+        else{
+          range = document.createRange();
+        }
     }
 
     //var rect = range.getBoundingClientRect();
     var rect = RangeFix.getBoundingClientRect(range);
-    return {
-        
-        left: rect.left,
-        top: rect.top,
-        right: rect.right,
-        bottom: rect.bottom
-        
+    
+        if(rect != null){
+      return {
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom
+        };
+    }
+
+     return {
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0
     };
 }
 
